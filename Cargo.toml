@@ -1,0 +1,7 @@
+[package]
+name = "libvterm-sys"
+version = "0.1.0"
+authors = ["roblabla <robinlambertz+dev@gmail.com>"]
+
+[dependencies]
+libc = "*"
