@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    vterm.rs                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: roblabla <robinlambertz+dev@gmail.c>       +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/07/26 15:31:47 by roblabla          #+#    #+#              #
-#    Updated: 2015/08/01 17:05:43 by roblabla         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 use vterm_keycodes::*;
 use libc::{c_void, c_char, c_int, c_long, uint8_t, uint32_t, size_t};
 use std;
@@ -66,8 +54,9 @@ pub enum VTermValueType {
 }
 
 // TODO : Calculate size of VTermValue at compile-time
+// TODO: Can't derive with pointer.
 #[repr(C)]
-#[derive(Debug)]
+//#[derive(Debug)]
 pub struct VTermValue {
     ptr: *mut c_char,
 }
@@ -115,12 +104,21 @@ pub enum VTermProp {
 }
 
 #[repr(C)]
-#[derive(Debug)]
-pub struct VTermGlyphInfo; // TODO : bitfields are a bitch.
+//#[derive(Debug)]
+// TODO: Can't derive with pointer
+// TODO: Bitfield, need better way to deal with it
+pub struct VTermGlyphInfo {
+    chars: *const uint32_t,
+    width: c_int,
+    contents: u32,
+}
 
 #[repr(C)]
 #[derive(Debug)]
-pub struct VTermLineInfo; // TODO : bitfields are a bitch.
+// TODO: Bitfield, need better way to deal with it
+pub struct VTermLineInfo {
+    contents: u32,
+}
 
 #[repr(C)]
 //#[derive(Debug)]
