@@ -1,4 +1,4 @@
-use vterm_keycodes::*;
+pub use vterm_keycodes::*;
 use libc::{c_void, c_char, c_int, c_long, uint8_t, uint32_t, size_t};
 use std;
 
@@ -321,6 +321,9 @@ pub enum VTermAttrMask {
 #[link(name = "vterm")]
 extern {
     pub fn vterm_obtain_screen(vt: *mut VTerm) -> *mut VTermScreen;
+    pub fn vterm_screen_set_callbacks(screen: *mut VTermScreen,
+                                      callbacks: *const VTermScreenCallbacks,
+                                      user: *mut c_void);
     pub fn vterm_screen_get_cbdata(screen: *mut VTermScreen) -> *mut c_void;
 
     pub fn vterm_screen_enable_altscreen(screen: *mut VTermScreen,
